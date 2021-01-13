@@ -31,6 +31,7 @@ fun main(args: Array<String>) {
             Application(address, port.toInt(), File(outputFolder))
         } catch (exception: Exception) {
             logger.error("Não foi possível prosseguir com a aplicação: ${exception.message}")
+            exception.printStackTrace()
             exitProcess(-1)
         }
 
@@ -51,4 +52,3 @@ private fun prepareOptions(): Options {
         addOption("o", "output", true, "Output folder")
     }
 }
-

@@ -54,8 +54,6 @@ class Application(private val address: String, private val port: Int, outputFold
 
         logger.info("All resources fetched.")
 
-        logger.info("Saving resources to file...")
-        resources.forEach(Resource::saveAssetsToFile)
         logger.info("Done. Client-side dumped to ${outputFolder.absolutePath}")
 
         exitProcess(0)
@@ -69,7 +67,7 @@ class Application(private val address: String, private val port: Int, outputFold
     }
 
     private fun waitFetchComplete() =
-        sleepWhile(lastRequest < 0 || System.currentTimeMillis() - lastRequest > 5000)
+        sleepWhile(lastRequest < 0 || System.currentTimeMillis() - lastRequest > 50000)
 
     private fun resetFetchTimer() {
         lastRequest = -1

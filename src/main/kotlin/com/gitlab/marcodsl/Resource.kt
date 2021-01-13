@@ -15,8 +15,6 @@ class Resource(val name: String, private val rootFolder: String) {
     var manifestType: ManifestType =
         ManifestType.NO_MANIFEST
 
-    val assets: MutableList<AssetResponse> = mutableListOf()
-
     private var files: MutableList<String> = mutableListOf()
 
     fun fetchManifest() {
@@ -85,16 +83,14 @@ class Resource(val name: String, private val rootFolder: String) {
         }
     }
 
-    fun saveAssetsToFile() {
-        for (asset in assets) {
-            File("$rootFolder/$name/${asset.assetPath}").apply {
-                if (!this.exists()) {
-                    this.parentFile.mkdirs()
-                    this.createNewFile()
-                }
-
-                this.bufferedWriter().use { it.write(asset.assetContent.toPlainText()) }
+    fun handleAsset(asset : AssetResponse) {
+        File("$rootFolder/$name/${asset.assetPath}").apply {
+            if (!this.exists()) {
+                this.parentFile.mkdirs()
+                this.createNewFile()
             }
+
+            this.bufferedWriter().use { it.write(asset.assetContent.toPlainText()) }
         }
     }
 

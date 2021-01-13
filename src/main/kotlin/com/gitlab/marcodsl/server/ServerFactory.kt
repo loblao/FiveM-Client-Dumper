@@ -53,7 +53,7 @@ object ServerFactory {
 
                 if (resource != null) {
                     logger.info("[${response.resourceName}] File `${response.assetFileName}` fetched.")
-                    resource.assets.add(response)
+                    resource.handleAsset(response)
                 }
 
                 application.lastRequest = System.currentTimeMillis()
